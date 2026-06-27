@@ -1,0 +1,18 @@
+import React from "react";
+import { Toaster } from "react-hot-toast";
+
+import AppRoutes from "./routes/AppRoutes";
+
+export default function App() {
+  return (
+    <>
+
+      {/* 🔔 Toast */}
+      <Toaster position="top-right" />
+
+      {/* 🚀 Routes */}
+      <AppRoutes />
+
+    </>
+  );
+}
