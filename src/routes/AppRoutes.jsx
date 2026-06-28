@@ -43,6 +43,7 @@ import UploadVideo from "../features/instructor/pages/UploadVideo";
 import Checkout from "../features/payment/pages/Checkout";
 import PaymentSuccess from "../features/payment/pages/PaymentSuccess";
 import PaymentFailed from "../features/payment/pages/PaymentFailed";
+import PublicPage from "../features/public/pages/PublicPage";
 
 import ProtectedRoute from "./ProtectedRoute";
 import { getDefaultAdminPath } from "../constants/adminPages";
@@ -97,7 +98,11 @@ export default function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to={getRedirectPath(user)} replace />} />
+      <Route path="/" element={<PublicPage type="home" />} />
+
+      <Route path="/about" element={<PublicPage type="about" />} />
+
+      <Route path="/contact" element={<PublicPage type="contact" />} />
 
       <Route
         path="/login"
@@ -116,11 +121,7 @@ export default function AppRoutes() {
 
       <Route
         path="/courses"
-        element={
-          <ProtectedRoute>
-            <Courses />
-          </ProtectedRoute>
-        }
+        element={<Courses />}
       />
 
       <Route
