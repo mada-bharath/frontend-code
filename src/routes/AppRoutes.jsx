@@ -46,6 +46,7 @@ import PaymentFailed from "../features/payment/pages/PaymentFailed";
 import PublicPage from "../features/public/pages/PublicPage";
 
 import ProtectedRoute from "./ProtectedRoute";
+import Seo from "./Seo";
 import { getDefaultAdminPath } from "../constants/adminPages";
 
 const getRedirectPath = (user) => {
@@ -97,7 +98,9 @@ export default function AppRoutes() {
   }
 
   return (
-    <Routes>
+    <>
+      <Seo />
+      <Routes>
       <Route path="/" element={<PublicPage type="home" />} />
 
       <Route path="/about" element={<PublicPage type="about" />} />
@@ -491,7 +494,8 @@ export default function AppRoutes() {
       />
 
       <Route path="*" element={<Navigate to={getRedirectPath(user)} replace />} />
-    </Routes>
+      </Routes>
+    </>
   );
 }
 
