@@ -1,6 +1,4 @@
-const API_ORIGIN = (import.meta.env.VITE_API_URL || "http://localhost:5000/api")
-  .replace(/\/api\/?$/, "")
-  .replace(/\/$/, "");
+import { API_ORIGIN } from "../core/api/apiConfig";
 
 export const getMediaUrl = (url, fallback = "") => {
   if (!url) return fallback;
