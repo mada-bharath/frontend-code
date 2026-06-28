@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
 /**
@@ -12,6 +12,7 @@ import Sidebar from "./Sidebar";
  */
 
 export default function AdminLayout({ children }) {
+  const navigate = useNavigate();
 
   /* ================= LOGOUT ================= */
   const handleLogout = () => {
@@ -20,7 +21,7 @@ export default function AdminLayout({ children }) {
       localStorage.removeItem("user");
       sessionStorage.clear();
 
-      window.location.href = "/login";
+      navigate("/login", { replace: true });
     } catch (error) {
       console.error("Logout error:", error);
     }

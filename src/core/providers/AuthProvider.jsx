@@ -198,9 +198,10 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     removeToken();
     localStorage.removeItem("user");
+    sessionStorage.clear();
     setUser(null);
     setTokenState(null);
-    navigate("/login");
+    navigate("/login", { replace: true });
   };
 
   /* =========================================================
