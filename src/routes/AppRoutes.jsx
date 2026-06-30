@@ -32,8 +32,10 @@ import Instructors from "../features/admin/pages/Instructors";
 import EditCourse from "../features/admin/pages/EditCourse";
 import CreateCourseAdmin from "../features/admin/pages/CreateCourse";
 import AdminAccess from "../features/admin/pages/AdminAccess";
+import SiteSettings from "../features/admin/pages/SiteSettings";
 
 import AdminLayout from "../design-system/layouts/AdminLayout";
+import Footer from "../design-system/layouts/Footer";
 import Navbar from "../design-system/layouts/Navbar";
 
 import InstructorDashboard from "../features/instructor/pages/Dashboard";
@@ -44,6 +46,7 @@ import Checkout from "../features/payment/pages/Checkout";
 import PaymentSuccess from "../features/payment/pages/PaymentSuccess";
 import PaymentFailed from "../features/payment/pages/PaymentFailed";
 import PublicPage from "../features/public/pages/PublicPage";
+import PolicyPage from "../features/public/pages/PolicyPage";
 
 import ProtectedRoute from "./ProtectedRoute";
 import Seo from "./Seo";
@@ -86,6 +89,13 @@ const InstructorShell = ({ children }) => (
   </>
 );
 
+const PageWithFooter = ({ children }) => (
+  <>
+    {children}
+    <Footer />
+  </>
+);
+
 export default function AppRoutes() {
   const { user, loading } = useAuth();
 
@@ -107,6 +117,10 @@ export default function AppRoutes() {
 
       <Route path="/contact" element={<PublicPage type="contact" />} />
 
+      <Route path="/terms-and-conditions" element={<PolicyPage type="terms" />} />
+      <Route path="/privacy-policy" element={<PolicyPage type="privacy" />} />
+      <Route path="/refund-and-return-policy" element={<PolicyPage type="refund" />} />
+
       <Route
         path="/login"
         element={<LoginRoute user={user} />}
@@ -124,14 +138,20 @@ export default function AppRoutes() {
 
       <Route
         path="/courses"
-        element={<Courses />}
+        element={
+          <PageWithFooter>
+            <Courses />
+          </PageWithFooter>
+        }
       />
 
       <Route
         path="/course/:courseId"
         element={
           <ProtectedRoute>
-            <CoursePlayer />
+            <PageWithFooter>
+              <CoursePlayer />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -140,7 +160,9 @@ export default function AppRoutes() {
         path="/courses/:courseId/roadmap"
         element={
           <ProtectedRoute>
-            <CourseRoadmap />
+            <PageWithFooter>
+              <CourseRoadmap />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -149,7 +171,9 @@ export default function AppRoutes() {
         path="/courses/:courseId"
         element={
           <ProtectedRoute>
-            <CourseDetail />
+            <PageWithFooter>
+              <CourseDetail />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -158,7 +182,9 @@ export default function AppRoutes() {
         path="/courses/:courseId/player"
         element={
           <ProtectedRoute>
-            <CoursePlayer />
+            <PageWithFooter>
+              <CoursePlayer />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -167,7 +193,9 @@ export default function AppRoutes() {
         path="/discussion"
         element={
           <ProtectedRoute>
-            <Discussion />
+            <PageWithFooter>
+              <Discussion />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -178,7 +206,9 @@ export default function AppRoutes() {
         path="/levelup"
         element={
           <ProtectedRoute>
-            <LevelUp />
+            <PageWithFooter>
+              <LevelUp />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -189,7 +219,9 @@ export default function AppRoutes() {
         path="/wishlist"
         element={
           <ProtectedRoute allowedRoles={["student", "instructor"]}>
-            <Wishlist />
+            <PageWithFooter>
+              <Wishlist />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -207,7 +239,9 @@ export default function AppRoutes() {
         path="/my-courses"
         element={
           <ProtectedRoute allowedRoles={["student", "instructor"]}>
-            <MyCourses />
+            <PageWithFooter>
+              <MyCourses />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -216,7 +250,9 @@ export default function AppRoutes() {
         path="/profile"
         element={
           <ProtectedRoute allowedRoles={["student", "instructor"]}>
-            <Profile />
+            <PageWithFooter>
+              <Profile />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -225,7 +261,9 @@ export default function AppRoutes() {
         path="/profile/view"
         element={
           <ProtectedRoute allowedRoles={["student", "instructor"]}>
-            <ProfileView />
+            <PageWithFooter>
+              <ProfileView />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -234,7 +272,9 @@ export default function AppRoutes() {
         path="/profile/personal"
         element={
           <ProtectedRoute allowedRoles={["student", "instructor"]}>
-            <PersonalDetails />
+            <PageWithFooter>
+              <PersonalDetails />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -245,7 +285,9 @@ export default function AppRoutes() {
         path="/profile/contact"
         element={
           <ProtectedRoute allowedRoles={["student", "instructor"]}>
-            <ContactDetails />
+            <PageWithFooter>
+              <ContactDetails />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -254,7 +296,9 @@ export default function AppRoutes() {
         path="/account"
         element={
           <ProtectedRoute allowedRoles={["student", "instructor"]}>
-            <Profile />
+            <PageWithFooter>
+              <Profile />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -268,7 +312,9 @@ export default function AppRoutes() {
         path="/account/my-courses"
         element={
           <ProtectedRoute allowedRoles={["student", "instructor"]}>
-            <MyCourses />
+            <PageWithFooter>
+              <MyCourses />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -277,7 +323,9 @@ export default function AppRoutes() {
         path="/profile/password"
         element={
           <ProtectedRoute allowedRoles={["student", "instructor"]}>
-            <ChangePassword />
+            <PageWithFooter>
+              <ChangePassword />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -286,7 +334,9 @@ export default function AppRoutes() {
         path="/billing"
         element={
           <ProtectedRoute allowedRoles={["student", "instructor"]}>
-            <Billing />
+            <PageWithFooter>
+              <Billing />
+            </PageWithFooter>
           </ProtectedRoute>
         }
       />
@@ -386,6 +436,14 @@ export default function AppRoutes() {
           element={
             <ProtectedRoute allowedRoles={["admin"]} adminPage="admin-access">
               <AdminAccess />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="site-settings"
+          element={
+            <ProtectedRoute allowedRoles={["admin"]} adminPage="site-settings">
+              <SiteSettings />
             </ProtectedRoute>
           }
         />

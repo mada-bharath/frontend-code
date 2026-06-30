@@ -9,6 +9,7 @@ import {
   Ticket,
   GraduationCap,
   PlusCircle,
+  Settings,
   ShieldCheck,
 } from "lucide-react";
 import { useAuth } from "../../core/providers/AuthProvider";
@@ -50,6 +51,12 @@ export default function Sidebar() {
       path: "/admin/admin-access",
       key: "admin-access",
       icon: <ShieldCheck size={18} />,
+    },
+    {
+      name: "Site Settings",
+      path: "/admin/site-settings",
+      key: "site-settings",
+      icon: <Settings size={18} />,
     },
     {
       name: "Create Course",

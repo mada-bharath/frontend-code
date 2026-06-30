@@ -3,6 +3,7 @@ export const ADMIN_PAGE_KEYS = {
   USERS: "users",
   FREE_USERS: "free-users",
   ADMIN_ACCESS: "admin-access",
+  SITE_SETTINGS: "site-settings",
   INSTRUCTORS: "instructors",
   CREATE_COURSE: "create-course",
   COURSES: "courses",
@@ -35,6 +36,12 @@ export const ADMIN_PAGES = [
     label: "Admin Access",
     path: "/admin/admin-access",
     description: "Admin page permissions",
+  },
+  {
+    key: ADMIN_PAGE_KEYS.SITE_SETTINGS,
+    label: "Site Settings",
+    path: "/admin/site-settings",
+    description: "Footer, contact, and legal policies",
   },
   {
     key: ADMIN_PAGE_KEYS.INSTRUCTORS,

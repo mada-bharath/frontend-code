@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSignupMutation } from "../../../core/api/endpoints/authApi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
 import sideImage from "../../../assets/sideImage.jpg";
 
@@ -13,6 +13,7 @@ export default function Signup() {
     email: "",
     phone: "",
     password: "",
+    acceptedPolicies: false,
   });
 
   const [error, setError] = useState("");
@@ -21,11 +22,11 @@ export default function Signup() {
      🔥 HANDLE INPUT CHANGE (SAFE)
   ======================================== */
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { checked, name, type, value } = e.target;
 
     setForm((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
@@ -49,12 +50,17 @@ export default function Signup() {
       return setError("Password is required");
     }
 
+    if (!form.acceptedPolicies) {
+      return setError("Please accept the Terms, Privacy Policy, and Refund Policy");
+    }
+
     try {
       const payload = {
         name: form.name.trim(), // 🔥 IMPORTANT FIX
         email: form.email.trim(),
         phone: form.phone ? String(form.phone) : "",
         password: form.password,
+        acceptedPolicies: form.acceptedPolicies,
       };
 
       console.log("FINAL PAYLOAD:", payload);
@@ -111,6 +117,7 @@ export default function Signup() {
             <input
               name="email"
               value={form.email}
+              type="email"
               placeholder="Enter Your Email"
               className="w-full border border-gray-200 p-3 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
               onChange={handleChange}
@@ -143,8 +150,34 @@ export default function Signup() {
               onChange={handleChange}
             />
 
+            <label className="flex items-start gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3 text-left text-xs leading-5 text-gray-600">
+              <input
+                type="checkbox"
+                name="acceptedPolicies"
+                checked={form.acceptedPolicies}
+                onChange={handleChange}
+                className="mt-1 h-4 w-4 shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <span>
+                I agree to the{" "}
+                <Link to="/terms-and-conditions" className="font-semibold text-indigo-600 hover:underline">
+                  Terms and Conditions
+                </Link>
+                ,{" "}
+                <Link to="/privacy-policy" className="font-semibold text-indigo-600 hover:underline">
+                  Privacy Policy
+                </Link>
+                , and{" "}
+                <Link to="/refund-and-return-policy" className="font-semibold text-indigo-600 hover:underline">
+                  Refund and Return Policy
+                </Link>
+                .
+              </span>
+            </label>
+
             {/* BUTTON */}
             <button
+              type="submit"
               className="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 hover:opacity-90 transition text-white p-3 rounded-full font-semibold"
             >
               {isLoading ? "Please wait..." : "Get Started for Free"}
@@ -165,7 +198,7 @@ export default function Signup() {
 
           {/* TERMS */}
           <p className="text-xs text-gray-400 mt-4 text-center">
-            By continuing, you agree to our Terms & Services
+            Your consent is stored securely with your account.
           </p>
 
         </div>

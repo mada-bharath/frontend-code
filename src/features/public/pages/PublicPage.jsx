@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Footer from "../../../design-system/layouts/Footer";
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -86,6 +87,8 @@ export default function PublicPage({ type = "home" }) {
           </div>
         </section>
       </main>
+
+      <Footer />
     </div>
   );
 }

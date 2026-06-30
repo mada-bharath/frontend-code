@@ -132,6 +132,7 @@ export const baseApi = createApi({
     "Coupons",
     "Discussions",
     "Wishlist",
+    "SiteSettings",
   ],
 
   endpoints: () => ({}),
